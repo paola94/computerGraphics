@@ -1,3 +1,5 @@
+//ciaoooooooo
+
 /*
  *    CREDITS: this program is based on the new nehe lesson 06.
  *    Modifiyed by Aldo Grattarola for the Computer Graphics course.
