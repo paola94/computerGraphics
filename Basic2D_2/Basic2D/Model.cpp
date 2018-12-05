@@ -248,6 +248,11 @@ bool MyModel::DrawGLScene(void)
 		  -4);
 	  this->glPrint("%1d %1d  %s", cx, cy, captured ? "captured" : "Not captured");
   }
+  {
+	  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)-ply + PixToCoord_Y(91),
+		  -4);
+	  this->glPrint("%1d %1d", this->Wwidth, this->Wheight);
+  }
 
 	glEnable(GL_TEXTURE_2D);							// Enable Texture Mapping
   return true;
