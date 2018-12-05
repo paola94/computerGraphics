@@ -1,6 +1,6 @@
 #include "Sistema.h"
 #include <Windows.h>
-
+#include <time.h>
 
 
 Sistema::Sistema()
@@ -10,6 +10,7 @@ Sistema::Sistema()
 
 
 void Sistema::disponi_tessere() {
+	srand(time(NULL));
 	for (int j = 0; j < N_RIGHE_SISTEMA; j++) {
 		for (int i = 0; i < N_COLONNE_SISTEMA; i++) {
 			matrice[i][j] = new Tessera(Img(rand() % 6));
