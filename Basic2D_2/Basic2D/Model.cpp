@@ -228,6 +228,8 @@ bool MyModel::DrawGLScene(void)
   glRasterPos3f(- (float) plx + PixToCoord_X(10), (float) ply-PixToCoord_Y(21),
     -4);
 
+  float x_r, y_r;
+
   // compute fps and write text
   this->frames++;
   if( this->frames > 18 ) {
@@ -252,6 +254,22 @@ bool MyModel::DrawGLScene(void)
 	  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)-ply + PixToCoord_Y(91),
 		  -4);
 	  this->glPrint("%1d %1d", this->Wwidth, this->Wheight);
+  }
+  {
+	  x_r = (2.0f * (float) cx / (float) this->Wwidth);
+	  y_r = -((2.0f * (float) cy / (float) this->Wheight) - 2.0f);
+	  x_r = x_r - 0.611979f;
+	  y_r = y_r - 0.302122f;
+	  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)-ply + PixToCoord_Y(121),
+		  -4);
+	  this->glPrint("%f %f", x_r, y_r);
+  }
+  {
+	  int colonna = floor(x_r / 0.066f);
+	  int riga = floor(y_r / 0.115f);
+	  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)-ply + PixToCoord_Y(151),
+		  -4);
+	  this->glPrint("%d %d", riga, colonna);
   }
 
 	glEnable(GL_TEXTURE_2D);							// Enable Texture Mapping
