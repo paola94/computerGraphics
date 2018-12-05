@@ -1,0 +1,10 @@
+
+*.iobj
+*.exe
+*.pdb
+*.obj
+*.obj
+*.tlog
+*.db
+*.vcxproj
+*.filters
