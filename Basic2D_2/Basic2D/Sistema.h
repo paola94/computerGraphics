@@ -1,6 +1,6 @@
 #pragma once
 
-
+//ciao paola
 
 // Sistema.h
 #ifndef Sistema_h
