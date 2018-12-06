@@ -21,6 +21,7 @@ class Sistema
 	bool win;
 	int hover_riga;
 	int hover_colonna;
+	Tessera* selezionata;
 
 
 	/*const int livello_1[N_RIGHE_SISTEMA][N_COLONNE_SISTEMA] = {
@@ -76,6 +77,8 @@ public:
 	int getColonna(int cx, int width);
 	int getRiga(int cy, int height);
 	void selectTessera(int i, int j);
+	void setSelezionata(int i, int j);
+	Tessera* getSelezionata();
 };
 
 #endif
