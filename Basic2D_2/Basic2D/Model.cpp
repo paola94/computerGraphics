@@ -168,33 +168,16 @@ bool MyModel::DrawGLScene(void)
   double px, py;
   for (int i = N_COLONNE - 1; i >= 0; i--) {
 	  for (int j = N_RIGHE - 1; j >= 0; j--) {
-		  glBindTexture(GL_TEXTURE_2D, texture[1 + system.getTesseraMatrice(i, j)->getImg()]);
-		  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
-		  glLoadIdentity();                  // Reset The View
-
-		  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
-		  glTranslatef((float)i / 14 - ((0.28*(N_RIGHE - 1)) / 7), (float)j / 7.5 - ((0.5*(N_RIGHE - 1)) / 7), 0);
-		  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
-		  system.getTesseraMatrice(i, j)->setX(i / 14.0 - ((0.28*(N_RIGHE - 1)) / 7));
-		  system.getTesseraMatrice(i, j)->setY((float)j / 7.5 - ((0.5*(N_RIGHE - 1)) / 7));
-		  glEnable(GL_BLEND);
-		  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		  glEnable(GL_ALPHA_TEST);
-		  glAlphaFunc(GL_GREATER, 0);
-		  glBegin(GL_QUADS);
-		  for (int k = 0; k < 4; k++) {
-			  glTexCoord2f(fire[k].u, fire[k].v);
-			  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
-		  }
-		  glEnd();
-		  if (system.getTesseraMatrice(i, j)->isSelezionata()) {
-			  glBindTexture(GL_TEXTURE_2D, texture[44]);
+		  if (system.getTesseraMatrice(i, j)->isEsisto()) {
+			  glBindTexture(GL_TEXTURE_2D, texture[1 + system.getTesseraMatrice(i, j)->getImg()]);
 			  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
 			  glLoadIdentity();                  // Reset The View
 
 			  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
-			  glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+			  glTranslatef((float)i / 14 - ((0.28*(N_RIGHE - 1)) / 7), (float)j / 7.5 - ((0.5*(N_RIGHE - 1)) / 7), 0);
 			  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
+			  system.getTesseraMatrice(i, j)->setX(i / 14.0 - ((0.28*(N_RIGHE - 1)) / 7));
+			  system.getTesseraMatrice(i, j)->setY((float)j / 7.5 - ((0.5*(N_RIGHE - 1)) / 7));
 			  glEnable(GL_BLEND);
 			  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			  glEnable(GL_ALPHA_TEST);
@@ -205,6 +188,44 @@ bool MyModel::DrawGLScene(void)
 				  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
 			  }
 			  glEnd();
+			  if (system.getTesseraMatrice(i, j)->isSelezionata()) {
+				  glBindTexture(GL_TEXTURE_2D, texture[44]);
+				  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
+				  glLoadIdentity();                  // Reset The View
+
+				  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+				  glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+				  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
+				  glEnable(GL_BLEND);
+				  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				  glEnable(GL_ALPHA_TEST);
+				  glAlphaFunc(GL_GREATER, 0);
+				  glBegin(GL_QUADS);
+				  for (int k = 0; k < 4; k++) {
+					  glTexCoord2f(fire[k].u, fire[k].v);
+					  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
+				  }
+				  glEnd();
+			  }
+			  else {
+				  glBindTexture(GL_TEXTURE_2D, texture[1 + system.getTesseraMatrice(i, j)->getImg()]);
+				  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
+				  glLoadIdentity();                  // Reset The View
+
+				  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+				  glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+				  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
+				  glEnable(GL_BLEND);
+				  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				  glEnable(GL_ALPHA_TEST);
+				  glAlphaFunc(GL_GREATER, 0);
+				  glBegin(GL_QUADS);
+				  for (int k = 0; k < 4; k++) {
+					  glTexCoord2f(fire[k].u, fire[k].v);
+					  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
+				  }
+				  glEnd();
+			  }
 		  }
 	  }
   }
@@ -249,23 +270,25 @@ bool MyModel::DrawGLScene(void)
   int riga = system.getRiga(cy, this->Wheight);
 
   if (riga >= 0 && riga < N_RIGHE && colonna >= 0 && colonna < N_COLONNE) {
-	  glBindTexture(GL_TEXTURE_2D, texture[43]);
-	  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
-	  glLoadIdentity();                  // Reset The View
+	  if (system.getTesseraMatrice(colonna, riga)->isEsisto()) {
+		  glBindTexture(GL_TEXTURE_2D, texture[43]);
+		  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
+		  glLoadIdentity();                  // Reset The View
 
-	  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
-	  glTranslatef(system.getTesseraMatrice(colonna, riga)->getX(), system.getTesseraMatrice(colonna, riga)->getY(), 0);
-	  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
-	  glEnable(GL_BLEND);
-	  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	  glEnable(GL_ALPHA_TEST);
-	  glAlphaFunc(GL_GREATER, 0);
-	  glBegin(GL_QUADS);
-	  for (int k = 0; k < 4; k++) {
-		  glTexCoord2f(fire[k].u, fire[k].v);
-		  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
+		  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+		  glTranslatef(system.getTesseraMatrice(colonna, riga)->getX(), system.getTesseraMatrice(colonna, riga)->getY(), 0);
+		  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
+		  glEnable(GL_BLEND);
+		  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		  glEnable(GL_ALPHA_TEST);
+		  glAlphaFunc(GL_GREATER, 0);
+		  glBegin(GL_QUADS);
+		  for (int k = 0; k < 4; k++) {
+			  glTexCoord2f(fire[k].u, fire[k].v);
+			  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
+		  }
+		  glEnd();
 	  }
-	  glEnd();
   }
 
   glDisable(GL_BLEND);

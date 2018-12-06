@@ -7,6 +7,7 @@
 Sistema::Sistema()
 {
 	disponi_tessere();
+	tesseraSelezionata = NULL;
 }
 
 
@@ -42,10 +43,43 @@ void Sistema::selectTessera(int riga, int colonna) {
 		Tessera* t = this->getTesseraMatrice(colonna, riga);
 		if (t->isEsisto()) {
 			if (colonna == 0 || colonna == N_COLONNE_SISTEMA-1) {
-				t->setSelezionata(true);
+				if (tesseraSelezionata == NULL) {
+					t->setSelezionata(true);
+					tesseraSelezionata = t;
+				}else {
+					if (t->getImg() != tesseraSelezionata->getImg()) {
+						t->setSelezionata(true);
+						tesseraSelezionata->setSelezionata(false);
+						tesseraSelezionata = t;
+					}else {
+						if (t->getX() != tesseraSelezionata->getX() || t->getY() != tesseraSelezionata->getY()) {
+							t->setEsisto(false);
+							tesseraSelezionata->setEsisto(false);
+							tesseraSelezionata = NULL;
+						}
+					}
+				}
+				
 			}else {
 				if (!this->getTesseraMatrice(colonna - 1, riga)->isEsisto() || !this->getTesseraMatrice(colonna + 1, riga)->isEsisto()) {
-					t->setSelezionata(true);
+					if (tesseraSelezionata == NULL) {
+						t->setSelezionata(true);
+						tesseraSelezionata = t;
+					}
+					else {
+						if (t->getImg() != tesseraSelezionata->getImg()) {
+							t->setSelezionata(true);
+							tesseraSelezionata->setSelezionata(false);
+							tesseraSelezionata = t;
+						}
+						else {
+							if (t->getX() != tesseraSelezionata->getX() || t->getY() != tesseraSelezionata->getY()) {
+								t->setEsisto(false);
+								tesseraSelezionata->setEsisto(false);
+								tesseraSelezionata = NULL;
+							}
+						}
+					}
 				}
 			}
 		}
@@ -53,10 +87,10 @@ void Sistema::selectTessera(int riga, int colonna) {
 }
 
 void Sistema::setSelezionata(int i, int j) {
-	selezionata = getTesseraMatrice(i, j);
+	tesseraSelezionata = getTesseraMatrice(i, j);
 }
 
 Tessera* Sistema::getSelezionata() {
-	return selezionata;
+	return tesseraSelezionata;
 }
 

@@ -19,7 +19,7 @@ class Sistema
 	Tessera *matrice[N_RIGHE_SISTEMA][N_COLONNE_SISTEMA];
 	int hover_riga;
 	int hover_colonna;
-	Tessera* selezionata;
+	Tessera* tesseraSelezionata;
 
 public:
 	Sistema();
