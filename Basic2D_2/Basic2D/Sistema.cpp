@@ -56,3 +56,7 @@ void Sistema::setSelezionata(int i, int j) {
 	selezionata = getTesseraMatrice(i, j);
 }
 
+Tessera* Sistema::getSelezionata() {
+	return selezionata;
+}
+
