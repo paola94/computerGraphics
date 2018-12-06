@@ -271,6 +271,8 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 							WPARAM	wParam,			// Additional Message Information
 							LPARAM	lParam)			// Additional Message Information
 {
+	AudioDevicePtr device(OpenDevice());
+	OutputStreamPtr bell(OpenSound(device, "../Data/bell.wav", false));
 	switch (uMsg)									// Check For Windows Messages
 	{
 		case WM_ACTIVATE:							// Watch For Window Activate Message
@@ -392,6 +394,7 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
   OutputStreamPtr stupid(OpenSound(device, "../Data/stupid.wav", false));
   //  AUDIO - end
 
+
   //ShowCursor(FALSE);
 
 	while(!done)									// Loop That Runs While done=FALSE
@@ -462,7 +465,12 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 
 
 		}
+		if (Data.system.isEliminata()) {
+			bell->play();
+			Data.system.setEliminata(false);
+		}
 	}
+	
 
 	// Shutdown
 	KillGLWindow();									// Kill The Window

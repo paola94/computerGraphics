@@ -20,6 +20,7 @@ class Sistema
 	int hover_riga;
 	int hover_colonna;
 	Tessera* tesseraSelezionata;
+	bool eliminata;
 
 public:
 	Sistema();
@@ -30,6 +31,8 @@ public:
 	void selectTessera(int i, int j);
 	void setSelezionata(int i, int j);
 	Tessera* getSelezionata();
+	void setEliminata(bool b);
+	bool isEliminata();
 };
 
 #endif
