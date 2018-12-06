@@ -22,7 +22,10 @@ void Sistema::disponi_tessere() {
 }
 
 Tessera* Sistema::getTesseraMatrice(int i, int j) {
-	return matrice[i][j];
+	if (i >= 0 && i < N_COLONNE_SISTEMA && j >= 0 && j < N_RIGHE_SISTEMA) {
+		return matrice[i][j];
+	}
+	return NULL;
 }
 
 int Sistema::getColonna(int cx, int Wwidth) {
@@ -109,3 +112,10 @@ bool Sistema::isEliminata() {
 	return eliminata;
 }
 
+void Sistema::setHoverTessera(int riga, int colonna) {
+	hoverTessera = this->getTesseraMatrice(colonna, riga);
+}
+
+Tessera* Sistema::getHoverTessera() {
+	return hoverTessera;
+}

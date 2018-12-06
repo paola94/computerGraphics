@@ -17,10 +17,11 @@ class Sistema
 {
 	int livello;
 	Tessera *matrice[N_RIGHE_SISTEMA][N_COLONNE_SISTEMA];
-	int hover_riga;
-	int hover_colonna;
+	//int hover_riga;
+	//int hover_colonna;
 	Tessera* tesseraSelezionata;
 	bool eliminata;
+	Tessera* hoverTessera;
 
 public:
 	Sistema();
@@ -33,6 +34,8 @@ public:
 	Tessera* getSelezionata();
 	void setEliminata(bool b);
 	bool isEliminata();
+	void setHoverTessera(int riga, int colonna);
+	Tessera* getHoverTessera();
 };
 
 #endif

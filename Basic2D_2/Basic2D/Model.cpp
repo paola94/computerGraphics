@@ -144,7 +144,7 @@ bool MyModel::DrawGLScene(void)
   //  TIMING - start
   clock_t t = clock();
   // elapsed time in seconds from the last draw
-  double elapsed = double (t - Tstamp) /  (double) CLOCKS_PER_SEC;
+  double elapsed = double (t - Tstamp) /  (double)CLOCKS_PER_SEC;
   // elapsed time in milliseconds from the last draw
   int ms_elapsed = (int) (t - Tstamp);
   // elapsed time in seconds from the beginning of the program
@@ -266,17 +266,40 @@ bool MyModel::DrawGLScene(void)
   */
   
   
-  int colonna = system.getColonna(cx, this->Wwidth);
+  /*int colonna = system.getColonna(cx, this->Wwidth);
   int riga = system.getRiga(cy, this->Wheight);
 
   if (riga >= 0 && riga < N_RIGHE && colonna >= 0 && colonna < N_COLONNE) {
-	  if (system.getTesseraMatrice(colonna, riga)->isEsisto()) {
+	  if (system.getTesseraMatrice(colonna, riga)->isEsisto()){
 		  glBindTexture(GL_TEXTURE_2D, texture[43]);
 		  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
 		  glLoadIdentity();                  // Reset The View
 
 		  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
 		  glTranslatef(system.getTesseraMatrice(colonna, riga)->getX(), system.getTesseraMatrice(colonna, riga)->getY(), 0);
+		  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
+		  glEnable(GL_BLEND);
+		  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		  glEnable(GL_ALPHA_TEST);
+		  glAlphaFunc(GL_GREATER, 0);
+		  glBegin(GL_QUADS);
+		  for (int k = 0; k < 4; k++) {
+			  glTexCoord2f(fire[k].u, fire[k].v);
+			  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
+		  }
+		  glEnd();
+	  }
+  }
+  */
+
+  if (system.getHoverTessera() != NULL) {
+	  if (system.getHoverTessera()->isEsisto()) {
+		  glBindTexture(GL_TEXTURE_2D, texture[43]);
+		  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
+		  glLoadIdentity();                  // Reset The View
+
+		  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+		  glTranslatef(system.getHoverTessera()->getX(), system.getHoverTessera()->getY(), 0);
 		  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
 		  glEnable(GL_BLEND);
 		  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -333,11 +356,11 @@ bool MyModel::DrawGLScene(void)
 	  this->glPrint("%1d %1d", this->Wwidth, this->Wheight);
   }
   
-  {
+  /*{
 	  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)-ply + PixToCoord_Y(151),
 		  -4);
 	  this->glPrint("%d %d", riga, colonna);
-  }
+  }*/
 
 	glEnable(GL_TEXTURE_2D);							// Enable Texture Mapping
   return true;

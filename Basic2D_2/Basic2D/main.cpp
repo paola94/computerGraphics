@@ -320,6 +320,9 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 			Data.cx = p.x; Data.cy = p.y;
 			if (Data.IsInClient(p.x, p.y)) {
 				if (!Data.captured) { Data.captured = true; SetCapture(hWnd); ShowCursor(TRUE); }
+				int riga = Data.system.getRiga(Data.cy, Data.Wheight);
+				int colonna = Data.system.getColonna(Data.cx, Data.Wwidth);
+				Data.system.setHoverTessera(riga, colonna);
 			}
 			else {
 				if (Data.captured) { Data.captured = false; ReleaseCapture(); ShowCursor(TRUE); }
