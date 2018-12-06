@@ -324,6 +324,19 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 			}
 		}
 		break;
+
+		case WM_LBUTTONDOWN:
+		{
+			POINTS p;
+			p = MAKEPOINTS(lParam);
+			Data.cx = p.x; Data.cy = p.y;
+			if (Data.IsInClient(p.x, p.y)) {
+				int riga = Data.system.getRiga(Data.cy, Data.Wheight);
+				int colonna = Data.system.getColonna(Data.cx, Data.Wwidth);
+				Data.system.selectTessera(riga, colonna);
+			}
+		}
+		break;
 	}
 
 	// Pass All Unhandled Messages To DefWindowProc

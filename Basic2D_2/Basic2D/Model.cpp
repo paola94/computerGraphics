@@ -113,6 +113,16 @@ bool MyModel::LoadGLTextures(void)
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 	if (texture[6] == 0) return false;
 
+	texture[43] = SOIL_load_OGL_texture
+	("../Data/bordoverde.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[43] == 0) return false;
+
+	texture[44] = SOIL_load_OGL_texture
+	("../Data/selezione.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[44] == 0) return false;
+
 
 
 	// Typical Texture Generation Using Data From The Bitmap
@@ -177,9 +187,29 @@ bool MyModel::DrawGLScene(void)
 			  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
 		  }
 		  glEnd();
+		  if (system.getTesseraMatrice(i, j)->isSelezionata()) {
+			  glBindTexture(GL_TEXTURE_2D, texture[44]);
+			  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
+			  glLoadIdentity();                  // Reset The View
+
+			  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+			  glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+			  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
+			  glEnable(GL_BLEND);
+			  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			  glEnable(GL_ALPHA_TEST);
+			  glAlphaFunc(GL_GREATER, 0);
+			  glBegin(GL_QUADS);
+			  for (int k = 0; k < 4; k++) {
+				  glTexCoord2f(fire[k].u, fire[k].v);
+				  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
+			  }
+			  glEnd();
+		  }
 	  }
   }
   
+
   //  Texture for the fire, change every 1/19 sec.
   //int texF = 1 + ((int( (Full_elapsed*19) )) %27 );
   //glBindTexture(GL_TEXTURE_2D,2);
@@ -213,6 +243,31 @@ bool MyModel::DrawGLScene(void)
   }
   glEnd();
   */
+  
+  
+  int colonna = system.getColonna(cx, this->Wwidth);
+  int riga = system.getRiga(cy, this->Wheight);
+
+  if (riga >= 0 && riga < N_RIGHE && colonna >= 0 && colonna < N_COLONNE) {
+	  glBindTexture(GL_TEXTURE_2D, texture[43]);
+	  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
+	  glLoadIdentity();                  // Reset The View
+
+	  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+	  glTranslatef(system.getTesseraMatrice(colonna, riga)->getX(), system.getTesseraMatrice(colonna, riga)->getY(), 0);
+	  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
+	  glEnable(GL_BLEND);
+	  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	  glEnable(GL_ALPHA_TEST);
+	  glAlphaFunc(GL_GREATER, 0);
+	  glBegin(GL_QUADS);
+	  for (int k = 0; k < 4; k++) {
+		  glTexCoord2f(fire[k].u, fire[k].v);
+		  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
+	  }
+	  glEnd();
+  }
+
   glDisable(GL_BLEND);
   glDisable(GL_ALPHA_TEST);
   
@@ -228,7 +283,6 @@ bool MyModel::DrawGLScene(void)
   glRasterPos3f(- (float) plx + PixToCoord_X(10), (float) ply-PixToCoord_Y(21),
     -4);
 
-  float x_r, y_r;
 
   // compute fps and write text
   this->frames++;
@@ -255,18 +309,8 @@ bool MyModel::DrawGLScene(void)
 		  -4);
 	  this->glPrint("%1d %1d", this->Wwidth, this->Wheight);
   }
+  
   {
-	  x_r = (2.0f * (float) cx / (float) this->Wwidth);
-	  y_r = -((2.0f * (float) cy / (float) this->Wheight) - 2.0f);
-	  x_r = x_r - 0.611979f;
-	  y_r = y_r - 0.302122f;
-	  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)-ply + PixToCoord_Y(121),
-		  -4);
-	  this->glPrint("%f %f", x_r, y_r);
-  }
-  {
-	  int colonna = floor(x_r / 0.066f);
-	  int riga = floor(y_r / 0.115f);
 	  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)-ply + PixToCoord_Y(151),
 		  -4);
 	  this->glPrint("%d %d", riga, colonna);

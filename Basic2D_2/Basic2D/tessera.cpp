@@ -4,6 +4,8 @@
 
 Tessera::Tessera(Img i) {
 	img = i;
+	esisto = true;
+	selezionata = false;
 }
 
 
@@ -36,4 +38,20 @@ void Tessera::setY(float coord_y) {
 
 float Tessera::getY() {
 	return y;
+}
+
+void Tessera::setEsisto(bool e) {
+	esisto = e;
+}
+
+bool Tessera::isEsisto() {
+	return esisto;
+}
+
+void Tessera::setSelezionata(bool s) {
+	selezionata = s;
+}
+
+bool Tessera::isSelezionata() {
+	return selezionata;
 }

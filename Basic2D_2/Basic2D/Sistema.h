@@ -19,6 +19,8 @@ class Sistema
 	Tessera *matrice[N_RIGHE_SISTEMA][N_COLONNE_SISTEMA];
 	bool game_over;
 	bool win;
+	int hover_riga;
+	int hover_colonna;
 
 
 	/*const int livello_1[N_RIGHE_SISTEMA][N_COLONNE_SISTEMA] = {
@@ -71,6 +73,9 @@ public:
 	Sistema();
 	void disponi_tessere();
 	Tessera* getTesseraMatrice(int i, int j);
+	int getColonna(int cx, int width);
+	int getRiga(int cy, int height);
+	void selectTessera(int i, int j);
 };
 
 #endif

@@ -7,6 +7,9 @@ class Tessera
 	Img img;
 	float x;
 	float y;
+	bool esisto;
+	bool selezionata;
+
 public:
 	Tessera(Img img);
 	~Tessera();
@@ -17,4 +20,8 @@ public:
 	float getX();
 	void setY(float y);
 	float getY();
+	void setEsisto(bool e);
+	bool isEsisto();
+	void setSelezionata(bool s);
+	bool isSelezionata();
 };

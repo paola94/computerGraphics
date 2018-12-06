@@ -56,13 +56,14 @@ public:
   bool	fullscreen;	    // Fullscreen Flag 
   int cx, cy;
   bool captured;
+  int Wheight, Wwidth;  // window dimensions in pixels
 
   Sistema system;
 
 private:
   //  projection limits in X and Y: x in [-plx, plx], y in [-ply, ply]
   double plx, ply;
-  int Wheight, Wwidth;  // window dimensions in pixels
+  
 
   int frames;           // n. of frames
   double frameTime;     // for fps computation
