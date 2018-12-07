@@ -137,9 +137,7 @@ bool MyModel::LoadGLTextures(void)
 
 bool MyModel::DrawGLScene(void)
 {
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
-  glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
-	glLoadIdentity();									// Reset The View
+  
 
   //  TIMING - start
   clock_t t = clock();
@@ -147,6 +145,9 @@ bool MyModel::DrawGLScene(void)
   double elapsed = double (t - Tstamp) /  (double)CLOCKS_PER_SEC;
   // elapsed time in milliseconds from the last draw
   int ms_elapsed = (int) (t - Tstamp);
+  if (ms_elapsed < 0.01) {
+	  return true;
+  }
   // elapsed time in seconds from the beginning of the program
   this->Full_elapsed = double (t - Tstart) /  (double) CLOCKS_PER_SEC;
   this->frameTime += double (t - Tstamp) /  (double) CLOCKS_PER_SEC;
@@ -154,6 +155,9 @@ bool MyModel::DrawGLScene(void)
   this->Tstamp = t;
   //  TIMING - end
   
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
+  glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
+  glLoadIdentity();									// Reset The View
   
   glBindTexture(GL_TEXTURE_2D, texture[0]);
 
@@ -226,6 +230,31 @@ bool MyModel::DrawGLScene(void)
 				  }
 				  glEnd();
 			  }
+		  }
+	  }
+  }
+  for (int i = 5; i >= 0; i--) {
+	  for (int j = 5; j >= 0; j--) {
+		  if (system.getTesseraMatrice(i, j)->isEsisto()) {
+			  glBindTexture(GL_TEXTURE_2D, texture[1 + system.getTesseraMatrice(i, j)->getImg()]);
+			  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
+			  glLoadIdentity();                  // Reset The View
+
+			  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+			  glTranslatef((float)i / 14 - ((0.162*(N_RIGHE - 1)) / 7), (float)j / 7.5 - ((0.28*(N_RIGHE - 1)) / 7), 0);
+			  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
+			  system.getTesseraMatrice(i, j)->setX(i / 14.0 - ((0.28*(N_RIGHE - 1)) / 7));
+			  system.getTesseraMatrice(i, j)->setY((float)j / 7.5 - ((0.5*(N_RIGHE - 1)) / 7));
+			  glEnable(GL_BLEND);
+			  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			  glEnable(GL_ALPHA_TEST);
+			  glAlphaFunc(GL_GREATER, 0);
+			  glBegin(GL_QUADS);
+			  for (int k = 0; k < 4; k++) {
+				  glTexCoord2f(fire[k].u, fire[k].v);
+				  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
+			  }
+			  glEnd();
 		  }
 	  }
   }
@@ -334,11 +363,11 @@ bool MyModel::DrawGLScene(void)
   // compute fps and write text
   this->frames++;
   if( this->frames > 18 ) {
-    //this->fps = frames / frameTime;
+    this->fps = frames / frameTime;
     this->frames = 0; this->frameTime = 0;
   }
-  this->glPrint("Tempo: %6.2f sec.",
-    Full_elapsed);
+  this->glPrint("Tempo: %6.2f sec. %f ",
+    Full_elapsed, fps);
 
   if(this->Full_elapsed < 10) {
     glRasterPos3f(- (float) plx + PixToCoord_X(10), (float) -ply+PixToCoord_Y(21),

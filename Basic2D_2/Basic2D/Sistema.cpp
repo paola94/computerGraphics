@@ -7,6 +7,7 @@
 Sistema::Sistema()
 {
 	disponi_tessere();
+	disponi_tessere2();
 	tesseraSelezionata = NULL;
 	eliminata = false;
 }
@@ -21,8 +22,22 @@ void Sistema::disponi_tessere() {
 	}
 }
 
+void Sistema::disponi_tessere2() {
+	srand(time(NULL));
+	for (int j = 0; j < N_RIGHE_SISTEMA; j++) {
+		for (int i = 0; i < N_COLONNE_SISTEMA; i++) {
+			if (i >= 0 && i < 2 && j >= 0 && j < 2) {
+				matrice2[i][j] = NULL;
+			}else {
+				matrice2[i][j] = new Tessera(Img(rand() % 6));
+			}
+		}
+	}
+}
+
 Tessera* Sistema::getTesseraMatrice(int i, int j) {
 	if (i >= 0 && i < N_COLONNE_SISTEMA && j >= 0 && j < N_RIGHE_SISTEMA) {
+		//
 		return matrice[i][j];
 	}
 	return NULL;
