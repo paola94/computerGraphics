@@ -292,6 +292,7 @@ bool MyModel::DrawGLScene(void)
   }
   */
 
+  //bordo verde
   if (system.getHoverTessera() != NULL) {
 	  if (system.getHoverTessera()->isEsisto()) {
 		  glBindTexture(GL_TEXTURE_2D, texture[43]);
