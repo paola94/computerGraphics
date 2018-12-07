@@ -113,6 +113,31 @@ bool MyModel::LoadGLTextures(void)
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 	if (texture[6] == 0) return false;
 
+	texture[7] = SOIL_load_OGL_texture
+	("../Data/tessera7.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[7] == 0) return false;
+
+	texture[8] = SOIL_load_OGL_texture
+	("../Data/tessera8.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[8] == 0) return false;
+
+	texture[9] = SOIL_load_OGL_texture
+	("../Data/tessera9.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[9] == 0) return false;
+
+	texture[10] = SOIL_load_OGL_texture
+	("../Data/tessera10.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[10] == 0) return false;
+
+	texture[11] = SOIL_load_OGL_texture
+	("../Data/tessera11.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[11] == 0) return false;
+
 	texture[43] = SOIL_load_OGL_texture
 	("../Data/bordoverde.png",
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
