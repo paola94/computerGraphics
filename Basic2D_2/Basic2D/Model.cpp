@@ -233,15 +233,15 @@ bool MyModel::DrawGLScene(void)
 		  }
 	  }
   }
-  for (int i = 5; i >= 0; i--) {
-	  for (int j = 5; j >= 0; j--) {
-		  if (system.getTesseraMatrice(i, j)->isEsisto()) {
+  for (int i = N_COLONNE -1; i >= 0; i--) {
+	  for (int j = N_RIGHE -1; j >= 0; j--) {
+		  if (system.getTesseraMatrice2(i, j)->isEsisto()) {
 			  glBindTexture(GL_TEXTURE_2D, texture[1 + system.getTesseraMatrice(i, j)->getImg()]);
 			  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
 			  glLoadIdentity();                  // Reset The View
 
 			  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
-			  glTranslatef((float)i / 14 - ((0.162*(N_RIGHE - 1)) / 7), (float)j / 7.5 - ((0.28*(N_RIGHE - 1)) / 7), 0);
+			  glTranslatef((float)i / 14 - ((0.273*(N_RIGHE - 1)) / 7), (float)j / 7.5 - ((0.485*(N_RIGHE - 1)) / 7), 0);
 			  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
 			  system.getTesseraMatrice(i, j)->setX(i / 14.0 - ((0.28*(N_RIGHE - 1)) / 7));
 			  system.getTesseraMatrice(i, j)->setY((float)j / 7.5 - ((0.5*(N_RIGHE - 1)) / 7));

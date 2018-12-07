@@ -29,6 +29,7 @@ public:
 	void disponi_tessere();
 	void disponi_tessere2();
 	Tessera* getTesseraMatrice(int i, int j);
+	Tessera* getTesseraMatrice2(int i, int j);
 	int getColonna(int cx, int width);
 	int getRiga(int cy, int height);
 	void selectTessera(int i, int j);

@@ -26,22 +26,42 @@ void Sistema::disponi_tessere2() {
 	srand(time(NULL));
 	for (int j = 0; j < N_RIGHE_SISTEMA; j++) {
 		for (int i = 0; i < N_COLONNE_SISTEMA; i++) {
-			if (i >= 0 && i < 2 && j >= 0 && j < 2) {
-				matrice2[i][j] = NULL;
-			}else {
 				matrice2[i][j] = new Tessera(Img(rand() % 6));
-			}
+				if ((i<2 || i>7) || (j < 2 || j>7)) {
+					matrice2[i][j]->setEsisto(false);
+					//matrice2[i][j] = NULL;
+				}
 		}
 	}
 }
 
 Tessera* Sistema::getTesseraMatrice(int i, int j) {
 	if (i >= 0 && i < N_COLONNE_SISTEMA && j >= 0 && j < N_RIGHE_SISTEMA) {
-		//
 		return matrice[i][j];
 	}
 	return NULL;
 }
+
+Tessera* Sistema::getTesseraMatrice2(int i, int j) {
+	if (i >= 0 && i < N_COLONNE_SISTEMA && j >= 0 && j < N_RIGHE_SISTEMA) {
+		return matrice2[i][j];
+	}
+	return NULL;
+}
+
+
+
+/*Tessera* Sistema::getTesseraMatrice(int i, int j) {
+	if (i >= 0 && i < N_COLONNE_SISTEMA && j >= 0 && j < N_RIGHE_SISTEMA) {
+		if (matrice2[i][j] != NULL) {
+			return matrice2[i][j];
+		}
+		else {
+			return matrice[i][j];
+		}
+	}
+	return NULL;
+}*/
 
 int Sistema::getColonna(int cx, int Wwidth) {
 	float x_r = (2.0f * (float)cx / (float) Wwidth);
@@ -128,7 +148,14 @@ bool Sistema::isEliminata() {
 }
 
 void Sistema::setHoverTessera(int riga, int colonna) {
-	hoverTessera = this->getTesseraMatrice(colonna, riga);
+	if (getTesseraMatrice2(colonna, riga)!=NULL) {
+		if (this->getTesseraMatrice2(colonna, riga)->isEsisto()) {
+			hoverTessera = this->getTesseraMatrice2(colonna, riga);
+		}
+		else {
+			hoverTessera = this->getTesseraMatrice(colonna, riga);
+		}
+	}
 }
 
 Tessera* Sistema::getHoverTessera() {
