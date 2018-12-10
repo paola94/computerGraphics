@@ -29,7 +29,6 @@ void Sistema::disponi_tessere2() {
 				matrice2[i][j] = new Tessera(Img(rand() % 6));
 				if ((i<2 || i>7) || (j < 2 || j>7)) {
 					matrice2[i][j]->setEsisto(false);
-					//matrice2[i][j] = NULL;
 				}
 		}
 	}
@@ -148,11 +147,8 @@ bool Sistema::isEliminata() {
 }
 
 void Sistema::setHoverTessera(int riga, int colonna) {
-	if (getTesseraMatrice2(colonna, riga)!=NULL) {
-		if (this->getTesseraMatrice2(colonna, riga)->isEsisto()) {
-			hoverTessera = this->getTesseraMatrice2(colonna, riga);
-		}
-		else {
+	if (getTesseraMatrice(colonna, riga)!=NULL) {
+		if (this->getTesseraMatrice(colonna, riga)->isEsisto()) {
 			hoverTessera = this->getTesseraMatrice(colonna, riga);
 		}
 	}

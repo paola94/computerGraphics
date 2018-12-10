@@ -268,8 +268,8 @@ bool MyModel::DrawGLScene(void)
 			  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
 			  glTranslatef((float)i / 14 - ((0.273*(N_RIGHE - 1)) / 7), (float)j / 7.5 - ((0.485*(N_RIGHE - 1)) / 7), 0);
 			  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
-			  system.getTesseraMatrice(i, j)->setX(i / 14.0 - ((0.28*(N_RIGHE - 1)) / 7));
-			  system.getTesseraMatrice(i, j)->setY((float)j / 7.5 - ((0.5*(N_RIGHE - 1)) / 7));
+			  system.getTesseraMatrice(i, j)->setX(i / 14.0 - ((0.273*(N_RIGHE - 1)) / 7));
+			  system.getTesseraMatrice(i, j)->setY((float)j / 7.5 - ((0.485*(N_RIGHE - 1)) / 7));
 			  glEnable(GL_BLEND);
 			  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			  glEnable(GL_ALPHA_TEST);
@@ -320,10 +320,10 @@ bool MyModel::DrawGLScene(void)
   */
   
   
-  /*int colonna = system.getColonna(cx, this->Wwidth);
+  int colonna = system.getColonna(cx, this->Wwidth);
   int riga = system.getRiga(cy, this->Wheight);
 
-  if (riga >= 0 && riga < N_RIGHE && colonna >= 0 && colonna < N_COLONNE) {
+  /*if (riga >= 0 && riga < N_RIGHE && colonna >= 0 && colonna < N_COLONNE) {
 	  if (system.getTesseraMatrice(colonna, riga)->isEsisto()){
 		  glBindTexture(GL_TEXTURE_2D, texture[43]);
 		  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
@@ -411,11 +411,11 @@ bool MyModel::DrawGLScene(void)
 	  this->glPrint("%1d %1d", this->Wwidth, this->Wheight);
   }
   
-  /*{
+  {
 	  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)-ply + PixToCoord_Y(151),
 		  -4);
 	  this->glPrint("%d %d", riga, colonna);
-  }*/
+  }
 
 	glEnable(GL_TEXTURE_2D);							// Enable Texture Mapping
   return true;

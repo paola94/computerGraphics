@@ -271,8 +271,6 @@ LRESULT CALLBACK WndProc(	HWND	hWnd,			// Handle For This Window
 							WPARAM	wParam,			// Additional Message Information
 							LPARAM	lParam)			// Additional Message Information
 {
-	AudioDevicePtr device(OpenDevice());
-	OutputStreamPtr bell(OpenSound(device, "../Data/bell.wav", false));
 	switch (uMsg)									// Check For Windows Messages
 	{
 		case WM_ACTIVATE:							// Watch For Window Activate Message
