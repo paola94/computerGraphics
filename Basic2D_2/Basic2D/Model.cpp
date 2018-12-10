@@ -368,6 +368,7 @@ bool MyModel::DrawGLScene(void)
 		  glEnd();
 	  }
   }
+ 
 
   glDisable(GL_BLEND);
   glDisable(GL_ALPHA_TEST);

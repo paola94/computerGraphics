@@ -9,6 +9,7 @@ Sistema::Sistema()
 	disponi_tessere();
 	disponi_tessere2();
 	tesseraSelezionata = NULL;
+	hoverTessera = NULL;
 	eliminata = false;
 }
 
@@ -78,6 +79,7 @@ int Sistema::getRiga(int cy, int Wheight) {
 
 void Sistema::selectTessera(int riga, int colonna) {
 	if (riga >= 0 && riga < N_RIGHE_SISTEMA && colonna >= 0 && colonna < N_COLONNE_SISTEMA) {
+		//dobbiamo controllare efficientemente quale sia la tessera al livello più alto e renderla cliccabile!
 		Tessera* t = this->getTesseraMatrice(colonna, riga);
 		if (t->isEsisto()) {
 			if (colonna == 0 || colonna == N_COLONNE_SISTEMA-1) {
@@ -97,6 +99,10 @@ void Sistema::selectTessera(int riga, int colonna) {
 							tesseraSelezionata->setEsisto(false);
 							tesseraSelezionata = NULL;
 							this->eliminata = true;
+						}
+						else {
+							t->setSelezionata(false);
+							tesseraSelezionata = NULL;
 						}
 					}
 				}
@@ -121,6 +127,10 @@ void Sistema::selectTessera(int riga, int colonna) {
 								tesseraSelezionata->setEsisto(false);
 								tesseraSelezionata = NULL;
 								this->eliminata = true;
+							}
+							else if(t->getX() == tesseraSelezionata->getX() || t->getY() == tesseraSelezionata->getY()) {
+								tesseraSelezionata = NULL;
+								t->setSelezionata(false);
 							}
 						}
 					}
