@@ -1,6 +1,6 @@
 #pragma once
 
-enum Img { A, B, C, D, E, F, G, H, I, J, K};
+enum Img { A, B, C, D, E, F, G, H, I, J, K, L};
 
 class Tessera
 {

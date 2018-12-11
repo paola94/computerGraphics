@@ -18,7 +18,7 @@ void Sistema::disponi_tessere() {
 	srand(time(NULL));
 	for (int j = 0; j < N_RIGHE_SISTEMA; j++) {
 		for (int i = 0; i < N_COLONNE_SISTEMA; i++) {
-			matrice[i][j] = new Tessera(Img(rand() % 11));
+			matrice[i][j] = new Tessera(Img(rand() % 12));
 		}
 	}
 }
@@ -27,7 +27,7 @@ void Sistema::disponi_tessere2() {
 	srand(time(NULL));
 	for (int j = 0; j < N_RIGHE_SISTEMA; j++) {
 		for (int i = 0; i < N_COLONNE_SISTEMA; i++) {
-				matrice2[i][j] = new Tessera(Img(rand() % 6));
+				matrice2[i][j] = new Tessera(Img(rand() % 12));
 				if ((i<2 || i>7) || (j < 2 || j>7)) {
 					matrice2[i][j]->setEsisto(false);
 				}
@@ -78,8 +78,111 @@ int Sistema::getRiga(int cy, int Wheight) {
 }
 
 void Sistema::selectTessera(int riga, int colonna) {
+	//dobbiamo controllare efficientemente quale sia la tessera al livello più alto e renderla cliccabile!
 	if (riga >= 0 && riga < N_RIGHE_SISTEMA && colonna >= 0 && colonna < N_COLONNE_SISTEMA) {
-		//dobbiamo controllare efficientemente quale sia la tessera al livello più alto e renderla cliccabile!
+		Tessera* t = NULL;
+		int livello = 0;
+		if (this->getTesseraMatrice2(colonna, riga)->isEsisto()) {
+			t = this->getTesseraMatrice2(colonna, riga);
+			livello = 2;
+		}
+		else if(this->getTesseraMatrice(colonna,riga)->isEsisto()) {
+			t = this->getTesseraMatrice(colonna, riga);
+			livello = 1;
+		}
+		if (t->isEsisto()) {
+			if (colonna == 0 || colonna == N_COLONNE_SISTEMA - 1) {
+				if (tesseraSelezionata == NULL) {
+					t->setSelezionata(true);
+					tesseraSelezionata = t;
+					this->eliminata = false;
+				}
+				else {
+					if (t->getImg() != tesseraSelezionata->getImg()) {
+						t->setSelezionata(true);
+						tesseraSelezionata->setSelezionata(false);
+						tesseraSelezionata = t;
+						this->eliminata = false;
+					}
+					else {
+						if (t->getX() != tesseraSelezionata->getX() || t->getY() != tesseraSelezionata->getY()) {
+							t->setEsisto(false);
+							tesseraSelezionata->setEsisto(false);
+							tesseraSelezionata = NULL;
+							this->eliminata = true;
+						}
+						else {
+							t->setSelezionata(false);
+							tesseraSelezionata = NULL;
+						}
+					}
+				}
+
+			}
+			else {
+				if (livello == 2) {
+					if (!this->getTesseraMatrice2(colonna - 1, riga)->isEsisto() || !this->getTesseraMatrice2(colonna + 1, riga)->isEsisto()) {
+						if (tesseraSelezionata == NULL) {
+							t->setSelezionata(true);
+							tesseraSelezionata = t;
+							this->eliminata = false;
+						}
+						else {
+							if (t->getImg() != tesseraSelezionata->getImg()) {
+								t->setSelezionata(true);
+								tesseraSelezionata->setSelezionata(false);
+								tesseraSelezionata = t;
+								this->eliminata = false;
+							}
+							else {
+								if (t->getX() != tesseraSelezionata->getX() || t->getY() != tesseraSelezionata->getY()) {
+									t->setEsisto(false);
+									tesseraSelezionata->setEsisto(false);
+									tesseraSelezionata = NULL;
+									this->eliminata = true;
+								}
+								else if (t->getX() == tesseraSelezionata->getX() || t->getY() == tesseraSelezionata->getY()) {
+									tesseraSelezionata = NULL;
+									t->setSelezionata(false);
+								}
+							}
+						}
+					}
+				}
+				else if (livello == 1) {
+					if (!this->getTesseraMatrice(colonna - 1, riga)->isEsisto() || !this->getTesseraMatrice(colonna + 1, riga)->isEsisto()) {
+						if (tesseraSelezionata == NULL) {
+							t->setSelezionata(true);
+							tesseraSelezionata = t;
+							this->eliminata = false;
+						}
+						else {
+							if (t->getImg() != tesseraSelezionata->getImg()) {
+								t->setSelezionata(true);
+								tesseraSelezionata->setSelezionata(false);
+								tesseraSelezionata = t;
+								this->eliminata = false;
+							}
+							else {
+								if (t->getX() != tesseraSelezionata->getX() || t->getY() != tesseraSelezionata->getY()) {
+									t->setEsisto(false);
+									tesseraSelezionata->setEsisto(false);
+									tesseraSelezionata = NULL;
+									this->eliminata = true;
+								}
+								else if (t->getX() == tesseraSelezionata->getX() || t->getY() == tesseraSelezionata->getY()) {
+									tesseraSelezionata = NULL;
+									t->setSelezionata(false);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/*if (riga >= 0 && riga < N_RIGHE_SISTEMA && colonna >= 0 && colonna < N_COLONNE_SISTEMA) {
 		Tessera* t = this->getTesseraMatrice(colonna, riga);
 		if (t->isEsisto()) {
 			if (colonna == 0 || colonna == N_COLONNE_SISTEMA-1) {
@@ -137,7 +240,7 @@ void Sistema::selectTessera(int riga, int colonna) {
 				}
 			}
 		}
-	}
+	}*/
 }
 
 void Sistema::setSelezionata(int i, int j) {
@@ -157,11 +260,21 @@ bool Sistema::isEliminata() {
 }
 
 void Sistema::setHoverTessera(int riga, int colonna) {
-	if (getTesseraMatrice(colonna, riga)!=NULL) {
+	Tessera* t = NULL;
+	if (riga >= 0 && riga < N_RIGHE_SISTEMA && colonna >= 0 && colonna < N_COLONNE_SISTEMA) {
+		if (this->getTesseraMatrice2(colonna, riga)->isEsisto()) {
+			t = this->getTesseraMatrice2(colonna, riga);
+		}
+		else {
+			t = this->getTesseraMatrice(colonna, riga);
+		}
+	}
+	hoverTessera = t;
+	/*if (getTesseraMatrice(colonna, riga)!=NULL) {
 		if (this->getTesseraMatrice(colonna, riga)->isEsisto()) {
 			hoverTessera = this->getTesseraMatrice(colonna, riga);
 		}
-	}
+	}*/
 }
 
 Tessera* Sistema::getHoverTessera() {
