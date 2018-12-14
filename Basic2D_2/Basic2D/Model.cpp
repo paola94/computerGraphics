@@ -145,7 +145,7 @@ bool MyModel::LoadGLTextures(void)
 	if (texture[12] == 0) return false;
 
 	texture[42] = SOIL_load_OGL_texture
-	("../Data/Keshiki.jpg",
+	("../Data/majongIniziale.jpg",
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 	if (texture[42] == 0) return false;
 
