@@ -526,7 +526,7 @@ bool MyModel::DrawGLScene(void)
 	  }
 
 
-	  glDisable(GL_BLEND);
+	  /*glDisable(GL_BLEND);
 	  glDisable(GL_ALPHA_TEST);
 
 	  //  Some text
@@ -575,6 +575,7 @@ bool MyModel::DrawGLScene(void)
 	  }
 
 	  glEnable(GL_TEXTURE_2D);							// Enable Texture Mapping
+	  */
   }
 	  break;
   case 2:
