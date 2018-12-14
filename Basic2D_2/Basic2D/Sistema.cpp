@@ -13,6 +13,7 @@ Sistema::Sistema()
 	tesseraSelezionata = NULL;
 	hoverTessera = NULL;
 	eliminata = false;
+	stato = Stato::start;
 }
 
 
@@ -166,7 +167,7 @@ void Sistema::selectTessera(int riga, int colonna) {
 			t = this->getTesseraMatrice(colonna, riga);
 			livello = 1;
 		}
-		if (t->isEsisto()) {
+		if (t != NULL && t->isEsisto()) {
 			if (colonna == 0 || colonna == N_COLONNE_SISTEMA - 1) {
 				if (tesseraSelezionata == NULL) {
 					t->setSelezionata(true);
@@ -387,4 +388,12 @@ void Sistema::setHoverTessera(int riga, int colonna) {
 
 Tessera* Sistema::getHoverTessera() {
 	return hoverTessera;
+}
+
+void Sistema::setStato(Stato s) {
+	stato = s;
+}
+
+int Sistema::getStato() {
+	return stato;
 }
