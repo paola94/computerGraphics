@@ -18,6 +18,7 @@ class Sistema
 	int livello;
 	Tessera *matrice[N_RIGHE_SISTEMA][N_COLONNE_SISTEMA];
 	Tessera *matrice2[N_RIGHE_SISTEMA][N_COLONNE_SISTEMA];
+	Tessera *matrice3[N_RIGHE_SISTEMA][N_COLONNE_SISTEMA];
 	//int hover_riga;
 	//int hover_colonna;
 	Tessera* tesseraSelezionata;
@@ -28,8 +29,10 @@ public:
 	Sistema();
 	void disponi_tessere();
 	void disponi_tessere2();
+	void disponi_tessere3();
 	Tessera* getTesseraMatrice(int i, int j);
 	Tessera* getTesseraMatrice2(int i, int j);
+	Tessera* getTesseraMatrice3(int i, int j);
 	int getColonna(int cx, int width);
 	int getRiga(int cy, int height);
 	void selectTessera(int i, int j);
