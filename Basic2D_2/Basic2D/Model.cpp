@@ -331,6 +331,70 @@ bool MyModel::DrawGLScene(void)
 		  }
 	  }
   }
+
+  for (int i = N_COLONNE - 1; i >= 0; i--) {
+	  for (int j = N_RIGHE - 1; j >= 0; j--) {
+		  if (system.getTesseraMatrice3(i, j)->isEsisto()) {
+			  glBindTexture(GL_TEXTURE_2D, texture[1 + system.getTesseraMatrice3(i, j)->getImg()]);
+			  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
+			  glLoadIdentity();                  // Reset The View
+
+			  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+			  glTranslatef((float)i / 14 - ((0.2665*(N_RIGHE - 1)) / 7), (float)j / 7.5 - ((0.4750*(N_RIGHE - 1)) / 7), 0);
+			  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
+			  system.getTesseraMatrice3(i, j)->setX(i / 14.0 - ((0.2665*(N_RIGHE - 1)) / 7));
+			  system.getTesseraMatrice3(i, j)->setY((float)j / 7.5 - ((0.4750*(N_RIGHE - 1)) / 7));
+			  glEnable(GL_BLEND);
+			  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			  glEnable(GL_ALPHA_TEST);
+			  glAlphaFunc(GL_GREATER, 0);
+			  glBegin(GL_QUADS);
+			  for (int k = 0; k < 4; k++) {
+				  glTexCoord2f(fire[k].u, fire[k].v);
+				  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
+			  }
+			  glEnd();
+			  if (system.getTesseraMatrice3(i, j)->isSelezionata()) {
+				  glBindTexture(GL_TEXTURE_2D, texture[44]);
+				  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
+				  glLoadIdentity();                  // Reset The View
+
+				  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+				  glTranslatef(system.getTesseraMatrice3(i, j)->getX(), system.getTesseraMatrice3(i, j)->getY(), 0);
+				  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
+				  glEnable(GL_BLEND);
+				  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				  glEnable(GL_ALPHA_TEST);
+				  glAlphaFunc(GL_GREATER, 0);
+				  glBegin(GL_QUADS);
+				  for (int k = 0; k < 4; k++) {
+					  glTexCoord2f(fire[k].u, fire[k].v);
+					  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
+				  }
+				  glEnd();
+			  }
+			  else {
+				  glBindTexture(GL_TEXTURE_2D, texture[1 + system.getTesseraMatrice3(i, j)->getImg()]);
+				  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
+				  glLoadIdentity();                  // Reset The View
+
+				  //glTranslatef(system.getTesseraMatrice(i, j)->getX(), system.getTesseraMatrice(i, j)->getY(), 0);
+				  glTranslatef(system.getTesseraMatrice3(i, j)->getX(), system.getTesseraMatrice3(i, j)->getY(), 0);
+				  glScalef(0.05f, 0.095f, 1);    // 1- scale the fire
+				  glEnable(GL_BLEND);
+				  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				  glEnable(GL_ALPHA_TEST);
+				  glAlphaFunc(GL_GREATER, 0);
+				  glBegin(GL_QUADS);
+				  for (int k = 0; k < 4; k++) {
+					  glTexCoord2f(fire[k].u, fire[k].v);
+					  glVertex3f(fire[k].x, fire[k].y, fire[k].z);
+				  }
+				  glEnd();
+			  }
+		  }
+	  }
+  }
   
 
   //  Texture for the fire, change every 1/19 sec.
