@@ -153,6 +153,11 @@ bool MyModel::LoadGLTextures(void)
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 	if (texture[44] == 0) return false;
 
+	texture[13] = SOIL_load_OGL_texture
+	("../Data/tessera35.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[13] == 0) return false;
+
 
 
 	// Typical Texture Generation Using Data From The Bitmap
@@ -202,7 +207,7 @@ bool MyModel::DrawGLScene(void)
   double px, py;
   for (int i = N_COLONNE - 1; i >= 0; i--) {
 	  for (int j = N_RIGHE - 1; j >= 0; j--) {
-		  if (system.getTesseraMatrice(i, j)->isEsisto()) {
+		  if (system.getTesseraMatrice(i, j)->isEsisto() && system.getTesseraMatrice(i,j)->isInizializzata()) {
 			  glBindTexture(GL_TEXTURE_2D, texture[1 + system.getTesseraMatrice(i, j)->getImg()]);
 			  glMatrixMode(GL_MODELVIEW);        // Select The Modelview Matrix
 			  glLoadIdentity();                  // Reset The View

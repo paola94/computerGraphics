@@ -1,11 +1,15 @@
 #include "Tessera.h"
 
-
+Tessera::Tessera() {
+	inizializzata = false;
+	esisto = false;
+}
 
 Tessera::Tessera(Img i) {
 	img = i;
 	esisto = true;
 	selezionata = false;
+	inizializzata = true;
 }
 
 
@@ -54,4 +58,12 @@ void Tessera::setSelezionata(bool s) {
 
 bool Tessera::isSelezionata() {
 	return selezionata;
+}
+
+void Tessera::setInizializzata(bool s) {
+	inizializzata = s;
+}
+
+bool Tessera::isInizializzata() {
+	return inizializzata;
 }

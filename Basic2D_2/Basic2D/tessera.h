@@ -1,6 +1,6 @@
 #pragma once
 
-enum Img { A, B, C, D, E, F, G, H, I, J, K, L};
+enum Img { A, B, C, D, E, F, G, H, I, J, K, L, M};
 
 class Tessera
 {
@@ -9,8 +9,10 @@ class Tessera
 	float y;
 	bool esisto;
 	bool selezionata;
+	bool inizializzata;
 
 public:
+	Tessera();
 	Tessera(Img img);
 	~Tessera();
 	bool isfree();
@@ -24,4 +26,7 @@ public:
 	bool isEsisto();
 	void setSelezionata(bool s);
 	bool isSelezionata();
+	void setInizializzata(bool s);
+	bool isInizializzata();
+
 };
