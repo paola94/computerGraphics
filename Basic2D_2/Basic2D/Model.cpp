@@ -526,7 +526,7 @@ bool MyModel::DrawGLScene(void)
 	  }
 
 
-	  /*glDisable(GL_BLEND);
+	  glDisable(GL_BLEND);
 	  glDisable(GL_ALPHA_TEST);
 
 	  //  Some text
@@ -534,22 +534,24 @@ bool MyModel::DrawGLScene(void)
 	  glLoadIdentity();									// Reset The Current Modelview Matrix
 	  glDisable(GL_TEXTURE_2D);
 
-	  // Color
-	  glColor3f(1.0f, 1.0f, 1.0f);
-
-	  // Position The Text On The Screen
-	  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)ply - PixToCoord_Y(21),
-		  -4);
-
+	 
 
 	  // compute fps and write text
-	  this->frames++;
+	  /*this->frames++;
 	  if (this->frames > 18) {
 		  this->fps = frames / frameTime;
 		  this->frames = 0; this->frameTime = 0;
+	  }*/
+	  if (system.getStato() == 3) {
+		  // Color
+		  glColor3f(1.0f, 1.0f, 1.0f);
+
+		  // Position The Text On The Screen
+		  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)ply - PixToCoord_Y(21),
+			  -4);
+
+		  this->glPrint("Game over");
 	  }
-	  this->glPrint("Tempo: %6.2f sec. %f ",
-		  Full_elapsed, fps);
 
 	  if (this->Full_elapsed < 10) {
 		  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)-ply + PixToCoord_Y(21),
@@ -557,7 +559,7 @@ bool MyModel::DrawGLScene(void)
 		  this->glPrint("F2 per attivare o disattivare il suono");
 	  }
 
-	  {
+	 /* {
 		  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)-ply + PixToCoord_Y(61),
 			  -4);
 		  this->glPrint("%1d %1d  %s", cx, cy, captured ? "captured" : "Not captured");
@@ -573,9 +575,9 @@ bool MyModel::DrawGLScene(void)
 			  -4);
 		  this->glPrint("%d %d", riga, colonna);
 	  }
-
-	  glEnable(GL_TEXTURE_2D);							// Enable Texture Mapping
 	  */
+	  glEnable(GL_TEXTURE_2D);							// Enable Texture Mapping
+	  
   }
 	  break;
   case 2:
@@ -609,6 +611,7 @@ bool MyModel::DrawGLScene(void)
 	  this->glPrint("Congratulazion! You win the game");
 	  glEnable(GL_TEXTURE_2D);
 	  break;
+  
   }
   return true;
 }

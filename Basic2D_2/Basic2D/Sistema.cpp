@@ -189,6 +189,9 @@ void Sistema::selectTessera(int riga, int colonna) {
 							tesseraSelezionata = NULL;
 							this->eliminata = true;
 							nTessere = nTessere - 2;
+							if (!nextMove()) {
+								stato = Stato::game_over;
+							}
 						}
 						else {
 							t->setSelezionata(false);
@@ -220,6 +223,9 @@ void Sistema::selectTessera(int riga, int colonna) {
 									tesseraSelezionata = NULL;
 									this->eliminata = true;
 									nTessere = nTessere - 2;
+									if (!nextMove()) {
+										stato = Stato::game_over;
+									}
 								}
 								else if (t->getX() == tesseraSelezionata->getX() || t->getY() == tesseraSelezionata->getY()) {
 									tesseraSelezionata = NULL;
@@ -250,6 +256,9 @@ void Sistema::selectTessera(int riga, int colonna) {
 									tesseraSelezionata = NULL;
 									this->eliminata = true;
 									nTessere = nTessere - 2;
+									if (!nextMove()) {
+										stato = Stato::game_over;
+									}
 								}
 								else if (t->getX() == tesseraSelezionata->getX() || t->getY() == tesseraSelezionata->getY()) {
 									tesseraSelezionata = NULL;
@@ -280,6 +289,9 @@ void Sistema::selectTessera(int riga, int colonna) {
 									tesseraSelezionata = NULL;
 									this->eliminata = true;
 									nTessere = nTessere - 2;
+									if (!nextMove()) {
+										stato = Stato::game_over;
+									}
 								}
 								else if (t->getX() == tesseraSelezionata->getX() || t->getY() == tesseraSelezionata->getY()) {
 									tesseraSelezionata = NULL;
@@ -409,4 +421,28 @@ void Sistema::setNTessere(int n) {
 
 int Sistema::getNTessere() {
 	return nTessere;
+}
+
+bool Sistema::nextMove() {
+	int label[12] = { 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 };
+	int q = 0;
+	for (int j = 0; j < N_RIGHE_SISTEMA; j++) {
+		for (int i = 0; i < N_COLONNE_SISTEMA; i++) {
+			if (this->getTesseraMatrice(i, j)->isEsisto()) {
+				int img = this->getTesseraMatrice(i, j)->getImg();
+				bool insert = true;
+				for (int k = 0; k < 12; k++) {
+					if (label[k] == img) {
+						insert = false;
+						return true;
+					}
+				} 
+				if (insert) {
+					label[q] = img;
+					q = q + 1;
+				}
+			}
+		}
+		return false;
+	}
 }

@@ -50,6 +50,7 @@ public:
 	int getStato();
 	void setNTessere(int n);
 	int getNTessere();
+	bool nextMove();
 };
 
 #endif
