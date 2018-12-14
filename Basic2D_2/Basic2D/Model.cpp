@@ -193,8 +193,13 @@ bool MyModel::DrawGLScene(void)
 
   this->Tstamp = t;
   //  TIMING - end
-  
+
+  int n = system.getNTessere();
+  if (n == 0) {
+	  system.setStato(Stato::win);
+  }
   int s = system.getStato();
+  
   switch (s) {
   case 0:
 	  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
@@ -224,10 +229,11 @@ bool MyModel::DrawGLScene(void)
 	  // Position The Text On The Screen
 	  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)ply - PixToCoord_Y(21),
 		  -4);
-	  this->glPrint("Press F5 to start the game");
+	  this->glPrint("Press backspace to start the game");
 	  glEnable(GL_TEXTURE_2D);
 	  break;
   case 1:
+  {
 	  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
 	  glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
 	  glLoadIdentity();									// Reset The View
@@ -569,6 +575,38 @@ bool MyModel::DrawGLScene(void)
 	  }
 
 	  glEnable(GL_TEXTURE_2D);							// Enable Texture Mapping
+  }
+	  break;
+  case 2:
+	  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
+	  glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
+	  glLoadIdentity();									// Reset The View
+
+	  glBindTexture(GL_TEXTURE_2D, texture[42]);
+
+	  //  Background
+	  glBegin(GL_QUADS);
+	  for (int i = 0; i < 4; i++) {
+		  glTexCoord2f(Background[i].u, Background[i].v);
+		  glVertex3f(Background[i].x, Background[i].y, Background[i].z);
+	  }
+	  glEnd();
+	  glDisable(GL_BLEND);
+	  glDisable(GL_ALPHA_TEST);
+
+	  //  Some text
+	  glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
+	  glLoadIdentity();									// Reset The Current Modelview Matrix
+	  glDisable(GL_TEXTURE_2D);
+
+	  // Color
+	  glColor3f(1.0f, 1.0f, 1.0f);
+
+	  // Position The Text On The Screen
+	  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)ply - PixToCoord_Y(21),
+		  -4);
+	  this->glPrint("Congratulazion! You win the game");
+	  glEnable(GL_TEXTURE_2D);
 	  break;
   }
   return true;

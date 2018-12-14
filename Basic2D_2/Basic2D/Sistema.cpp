@@ -14,6 +14,7 @@ Sistema::Sistema()
 	hoverTessera = NULL;
 	eliminata = false;
 	stato = Stato::start;
+	nTessere = 152;
 }
 
 
@@ -187,6 +188,7 @@ void Sistema::selectTessera(int riga, int colonna) {
 							tesseraSelezionata->setEsisto(false);
 							tesseraSelezionata = NULL;
 							this->eliminata = true;
+							nTessere = nTessere - 2;
 						}
 						else {
 							t->setSelezionata(false);
@@ -217,6 +219,7 @@ void Sistema::selectTessera(int riga, int colonna) {
 									tesseraSelezionata->setEsisto(false);
 									tesseraSelezionata = NULL;
 									this->eliminata = true;
+									nTessere = nTessere - 2;
 								}
 								else if (t->getX() == tesseraSelezionata->getX() || t->getY() == tesseraSelezionata->getY()) {
 									tesseraSelezionata = NULL;
@@ -246,6 +249,7 @@ void Sistema::selectTessera(int riga, int colonna) {
 									tesseraSelezionata->setEsisto(false);
 									tesseraSelezionata = NULL;
 									this->eliminata = true;
+									nTessere = nTessere - 2;
 								}
 								else if (t->getX() == tesseraSelezionata->getX() || t->getY() == tesseraSelezionata->getY()) {
 									tesseraSelezionata = NULL;
@@ -275,6 +279,7 @@ void Sistema::selectTessera(int riga, int colonna) {
 									tesseraSelezionata->setEsisto(false);
 									tesseraSelezionata = NULL;
 									this->eliminata = true;
+									nTessere = nTessere - 2;
 								}
 								else if (t->getX() == tesseraSelezionata->getX() || t->getY() == tesseraSelezionata->getY()) {
 									tesseraSelezionata = NULL;
@@ -396,4 +401,12 @@ void Sistema::setStato(Stato s) {
 
 int Sistema::getStato() {
 	return stato;
+}
+
+void Sistema::setNTessere(int n) {
+	nTessere = n;
+}
+
+int Sistema::getNTessere() {
+	return nTessere;
 }

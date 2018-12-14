@@ -454,8 +454,8 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 				else bell->play();
 			}*/
 
-			if (Data.keys[VK_F5]) {					// Is F3 Being Pressed?
-				Data.keys[VK_F5] = FALSE;					// If So Make Key FALSE
+			if (Data.keys[VK_SPACE]) {					// Is F3 Being Pressed?
+				Data.keys[VK_SPACE] = FALSE;					// If So Make Key FALSE
 				Data.system.setStato(Stato::gioco);
 			}
 		}

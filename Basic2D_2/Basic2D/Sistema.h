@@ -12,7 +12,7 @@
 
 #define PI 3.14159265
 
-enum Stato {start, gioco, game_over, win };
+enum Stato {start, gioco, win, game_over };
 
 class Sistema
 {
@@ -26,6 +26,7 @@ class Sistema
 	bool eliminata;
 	Tessera* hoverTessera;
 	Stato stato;
+	int nTessere;
 	
 
 public:
@@ -47,6 +48,8 @@ public:
 	Tessera* getHoverTessera();
 	void setStato(Stato s);
 	int getStato();
+	void setNTessere(int n);
+	int getNTessere();
 };
 
 #endif
