@@ -30,7 +30,7 @@ void Sistema::disponi_tessere() {
 	while (count < N_RIGHE_SISTEMA*N_COLONNE_SISTEMA) {
 		int i = rand() % N_COLONNE_SISTEMA;
 		int j = rand() % N_RIGHE_SISTEMA;
-		int a = rand() % 12;
+		int a = rand() % 24;
 		if (!matrice[i][j]->isInizializzata()) {
 			matrice[i][j] = new Tessera(Img(a));
 			do {
@@ -55,7 +55,7 @@ void Sistema::disponi_tessere2() {
 	while (count < (N_RIGHE_SISTEMA-4)*(N_COLONNE_SISTEMA-4)) {
 		int i = rand() % (N_COLONNE_SISTEMA-4) + 2;
 		int j = rand() % (N_RIGHE_SISTEMA-4) + 2;
-		int a = rand() % 12;
+		int a = rand() % 24;
 		if (!matrice2[i][j]->isInizializzata()) {
 			matrice2[i][j] = new Tessera(Img(a));
 			do {
@@ -88,7 +88,7 @@ void Sistema::disponi_tessere3() {
 	while (count < (N_RIGHE_SISTEMA - 6)*(N_COLONNE_SISTEMA - 6)) {
 		int i = rand() % (N_COLONNE_SISTEMA - 6) + 3;
 		int j = rand() % (N_RIGHE_SISTEMA - 6) + 3;
-		int a = rand() % 12;
+		int a = rand() % 24;
 		if (!matrice3[i][j]->isInizializzata()) {
 			matrice3[i][j] = new Tessera(Img(a));
 			do {
@@ -443,6 +443,6 @@ bool Sistema::nextMove() {
 				}
 			}
 		}
-		return false;
 	}
+	return false;
 }

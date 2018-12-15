@@ -144,6 +144,66 @@ bool MyModel::LoadGLTextures(void)
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 	if (texture[12] == 0) return false;
 
+	texture[13] = SOIL_load_OGL_texture
+	("../Data/tessera13.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[13] == 0) return false;
+
+	texture[14] = SOIL_load_OGL_texture
+	("../Data/tessera14.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[14] == 0) return false;
+
+	texture[15] = SOIL_load_OGL_texture
+	("../Data/tessera15.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[15] == 0) return false;
+
+	texture[16] = SOIL_load_OGL_texture
+	("../Data/tessera16.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[16] == 0) return false;
+
+	texture[17] = SOIL_load_OGL_texture
+	("../Data/tessera17.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[17] == 0) return false;
+
+	texture[18] = SOIL_load_OGL_texture
+	("../Data/tessera18.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[18] == 0) return false;
+
+	texture[19] = SOIL_load_OGL_texture
+	("../Data/tessera19.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[19] == 0) return false;
+
+	texture[20] = SOIL_load_OGL_texture
+	("../Data/tessera20.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[20] == 0) return false;
+
+	texture[21] = SOIL_load_OGL_texture
+	("../Data/tessera21.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[21] == 0) return false;
+
+	texture[22] = SOIL_load_OGL_texture
+	("../Data/tessera22.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[22] == 0) return false;
+
+	texture[23] = SOIL_load_OGL_texture
+	("../Data/tessera23.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[23] == 0) return false;
+
+	texture[24] = SOIL_load_OGL_texture
+	("../Data/tessera24.png",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[24] == 0) return false;
+
 	texture[42] = SOIL_load_OGL_texture
 	("../Data/majongIniziale.jpg",
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
@@ -534,7 +594,7 @@ bool MyModel::DrawGLScene(void)
 	  glLoadIdentity();									// Reset The Current Modelview Matrix
 	  glDisable(GL_TEXTURE_2D);
 
-	 
+	  glColor3f(1.0f, 1.0f, 1.0f);
 
 	  // compute fps and write text
 	  /*this->frames++;
@@ -543,9 +603,6 @@ bool MyModel::DrawGLScene(void)
 		  this->frames = 0; this->frameTime = 0;
 	  }*/
 	  if (system.getStato() == 3) {
-		  // Color
-		  glColor3f(1.0f, 1.0f, 1.0f);
-
 		  // Position The Text On The Screen
 		  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)ply - PixToCoord_Y(21),
 			  -4);
