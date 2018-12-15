@@ -219,6 +219,11 @@ bool MyModel::LoadGLTextures(void)
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
 	if (texture[44] == 0) return false;
 
+	texture[45] = SOIL_load_OGL_texture
+	("../Data/majongFinale.jpg",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
+	if (texture[45] == 0) return false;
+
 	/*texture[13] = SOIL_load_OGL_texture
 	("../Data/tessera35.png",
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y);
@@ -642,7 +647,7 @@ bool MyModel::DrawGLScene(void)
 	  glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
 	  glLoadIdentity();									// Reset The View
 
-	  glBindTexture(GL_TEXTURE_2D, texture[42]);
+	  glBindTexture(GL_TEXTURE_2D, texture[45]);
 
 	  //  Background
 	  glBegin(GL_QUADS);
