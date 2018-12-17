@@ -124,6 +124,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, bool fullscree
 	wc.lpszMenuName		= NULL;									// We Don't Want A Menu
 	wc.lpszClassName	= "Basic2D";								// Set The Class Name
 
+
 	if (!RegisterClass(&wc))									// Attempt To Register The Window Class
 	{
 		MessageBox(NULL,"Failed To Register The Window Class.","ERROR",MB_OK|MB_ICONEXCLAMATION);

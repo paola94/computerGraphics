@@ -280,7 +280,7 @@ bool MyModel::DrawGLScene(void)
 		  glVertex3f(Background[i].x, Background[i].y, Background[i].z);
 	  }
 	  glEnd();
-	  glDisable(GL_BLEND);
+	  /*glDisable(GL_BLEND);
 	  glDisable(GL_ALPHA_TEST);
 
 	  //  Some text
@@ -294,8 +294,9 @@ bool MyModel::DrawGLScene(void)
 	  // Position The Text On The Screen
 	  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)ply - PixToCoord_Y(21),
 		  -4);
-	  this->glPrint("Press backspace to start the game");
+	  this->glPrint("Premere F2 per disattivare i suoni");
 	  glEnable(GL_TEXTURE_2D);
+	  */
 	  break;
   case 1:
   {
@@ -615,13 +616,14 @@ bool MyModel::DrawGLScene(void)
 		  this->glPrint("Game over");
 	  }
 
-	  if (this->Full_elapsed < 10) {
+	 // if (this->Full_elapsed < 10) {
+	  {
 		  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)-ply + PixToCoord_Y(21),
 			  -4);
-		  this->glPrint("F2 per attivare o disattivare il suono");
+		  this->glPrint("F2 suono on/off");
 	  }
-
-	 /* {
+	  /*
+	  {
 		  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)-ply + PixToCoord_Y(61),
 			  -4);
 		  this->glPrint("%1d %1d  %s", cx, cy, captured ? "captured" : "Not captured");
@@ -656,22 +658,7 @@ bool MyModel::DrawGLScene(void)
 		  glVertex3f(Background[i].x, Background[i].y, Background[i].z);
 	  }
 	  glEnd();
-	  glDisable(GL_BLEND);
-	  glDisable(GL_ALPHA_TEST);
-
-	  //  Some text
-	  glMatrixMode(GL_MODELVIEW);				// Select The Modelview Matrix
-	  glLoadIdentity();									// Reset The Current Modelview Matrix
-	  glDisable(GL_TEXTURE_2D);
-
-	  // Color
-	  glColor3f(1.0f, 1.0f, 1.0f);
-
-	  // Position The Text On The Screen
-	  glRasterPos3f(-(float)plx + PixToCoord_X(10), (float)ply - PixToCoord_Y(21),
-		  -4);
-	  this->glPrint("Congratulazion! You win the game");
-	  glEnable(GL_TEXTURE_2D);
+	  
 	  break;
   
   }
